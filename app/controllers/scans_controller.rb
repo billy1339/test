@@ -18,7 +18,7 @@ class ScansController < ApplicationController
   # POST /scans
   # POST /scans.json
   def create
-    @scan = Scan.new(scan_params)
+    @scan = Scan.create(scan_params)
 
     if @scan.save
       render json: @scan, status: :created, location: @scan
@@ -54,6 +54,6 @@ class ScansController < ApplicationController
     end
 
     def scan_params
-      params[:scan]
+      params.require(:scan).permit(:barcode, :found, :name, :offer_count)
     end
 end
